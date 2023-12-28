@@ -7,6 +7,14 @@ class CounterState extends Equatable {
 
   @override
   List<Object?> get props => [counterValue];
+
+  Map<String, dynamic> toMap() => {
+        'counterValue': counterValue,
+      };
+
+  factory CounterState.fromJson(Map<String, dynamic> json) => CounterState(
+        counterValue: json['counterValue']?.toInt() ?? 0,
+      );
 }
 
 final class CounterInitial extends CounterState {

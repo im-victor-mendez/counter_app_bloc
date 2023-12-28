@@ -78,16 +78,22 @@ class _HomeScreenState extends State<HomeScreen> {
   void counterListener(context, state) {
     switch (state) {
       case DecrementState():
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Successfully decrement')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Successfully decrement'),
+          duration: Duration(milliseconds: 50),
+        ));
         break;
       case IncrementState():
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Successfully decrement')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Successfully increment'),
+          duration: Duration(milliseconds: 50),
+        ));
         break;
       default:
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('An error has been ocurred')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('An error has been ocurred'),
+          duration: Duration(milliseconds: 50),
+        ));
     }
   }
 }
