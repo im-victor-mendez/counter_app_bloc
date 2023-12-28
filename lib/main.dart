@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'blocs/counter_bloc/counter_bloc.dart';
 import 'screen/home_screen.dart';
 
 void main() {
@@ -10,10 +12,13 @@ class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => CounterBloc(),
+        child: MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: HomeScreen(),
         ),
-        home: HomeScreen(),
       );
 }
