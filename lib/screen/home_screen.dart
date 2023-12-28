@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/counter_bloc/counter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,15 +11,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int counterValue = 0;
-
-  void increaseNumber() => setState(() => counterValue++);
-
-  void decreaseNumber() => setState(() => counterValue--);
-
   @override
   Widget build(BuildContext context) {
     print('Whole \'HomeScreen\' built');
+
+    final counterBloc = context.read<CounterBloc>();
+
+    void increaseNumber() => counterBloc.add(CounterIncrementEvent());
+    void decreaseNumber() => counterBloc.add(CounterDecrementEvent());
 
     return Scaffold(
       appBar: AppBar(
@@ -28,9 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Counter value
             Center(
-              child: Text(
-                'Counter value: $counterValue',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              child: BlocBuilder<CounterBloc, CounterState>(
+                builder: (context, state) {
+                  return Text(
+                    'Counter value: ${state.counterValue}',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  );
+                },
               ),
             ),
             // Space
