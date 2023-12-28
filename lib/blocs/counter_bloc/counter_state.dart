@@ -12,3 +12,11 @@ class CounterState extends Equatable {
 final class CounterInitial extends CounterState {
   CounterInitial({super.counterValue = 0});
 }
+
+class IncrementState extends CounterState {
+  IncrementState(int increasedValue) : super(counterValue: increasedValue);
+}
+
+class DecrementState extends CounterState {
+  DecrementState(int decreasedValue) : super(counterValue: decreasedValue);
+}

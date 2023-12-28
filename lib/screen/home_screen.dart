@@ -30,13 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Counter value
             Center(
-              child: BlocBuilder<CounterBloc, CounterState>(
-                builder: (context, state) {
-                  return Text(
-                    'Counter value: ${state.counterValue}',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  );
-                },
+              child: BlocConsumer<CounterBloc, CounterState>(
+                listener: counterListener,
+                builder: counterBuilder,
               ),
             ),
             // Space
@@ -72,5 +68,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Widget counterBuilder(context, state) => Text(
+        'Counter value: ${state.counterValue}',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      );
+
+  void counterListener(context, state) {
+    switch (state) {
+      case DecrementState():
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Successfully decrement')));
+        break;
+      case IncrementState():
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Successfully decrement')));
+        break;
+      default:
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('An error has been ocurred')));
+    }
   }
 }
